@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import Firebase from "firebase";
+// import firebase from "firebase/app";
 import Navbar from "@/components/Navbar";
-const app = Firebase.initializeApp(process.env.config);
-const db = app.database();
+// const app = firebase.initializeApp(process.env.config);
+// const db = app.database();
 
-const notes = db.ref("notes");
+// const notes = db.ref("notes");
 
 import Sidebar from "@/components/Sidebar";
 export default {
@@ -20,10 +20,10 @@ export default {
   components: {
     Navbar,
     Sidebar
-  },
-  firebase: {
-    notes: notes
   }
+  // firebase: {
+  //   notes: notes
+  // }
 };
 </script>
 

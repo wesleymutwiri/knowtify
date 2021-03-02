@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
 import Editor from "../views/Editor.vue";
+import Login from "../views/Login.vue";
+import SignUp from "../views/SignUp.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +26,16 @@ const routes: Array<RouteConfig> = [
     path: "/editor",
     name: "Editor",
     component: Editor
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: SignUp
   }
 ];
 
