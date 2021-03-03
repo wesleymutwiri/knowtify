@@ -6,35 +6,38 @@
     <div class="form">
       <h1>Login</h1>
       <form v-on:submit.prevent>
-        <input type="email" name="email" id="" v-model="email" />
-        <input type="password" name="password" id="" v-model="password" />
-        <button class="login" @click="login">Login</button>
+        <input type="email" name="email" id="" v-model="user.email" />
+        <input type="password" name="password" id="" v-model="user.password" />
+        <button class="login" @click="login" v-if="!isLoading">Login</button>
+        <button type="button" v-else disabled>Loading...</button>
       </form>
     </div>
   </div>
 </template>
 <script>
-import firebase from "firebase";
+import { login } from "../services/firebaseService";
 
 export default {
   name: "login",
   data() {
     return {
-      email: "",
-      password: ""
+      user: {
+        email: "",
+        password: ""
+      },
+      isLoading: false
     };
   },
   methods: {
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(userCredential => {
-          alert("Successfully logged in", userCredential);
-          this.$router.replace("/");
+    async login() {
+      this.isLoading = true;
+      login(this.user.email, this.user.password)
+        .then(user => {
+          this.$store.commit("setUser", user);
+          this.isLoading = false;
         })
-        .catch(error => {
-          alert("Something happened", error);
+        .then(() => {
+          this.$router.push("/");
         });
     }
   }
