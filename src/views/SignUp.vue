@@ -28,9 +28,10 @@
           v-model="user.password"
           placeholder="****"
         />
-        <button class="sign-up" @click="signUp">Sign Up</button>
+        <v-btn class="sign-up" @click="signUp">Sign Up</v-btn>
       </form>
     </div>
+    <router-link to="/login">Login</router-link>
   </div>
 </template>
 <script>
@@ -60,3 +61,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+input {
+  border: 1px solid #ddd;
+  padding: 1rem;
+}
+</style>

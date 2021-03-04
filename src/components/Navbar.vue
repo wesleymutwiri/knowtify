@@ -5,14 +5,16 @@
         <h1>Knowtify</h1>
       </div>
       <div class="links">
-        <router-link to="/">Home</router-link> |
+        <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
       </div>
+      <v-btn @click="logout">Logout</v-btn>
       <div v-if="!isAuthenticated">
         <a href="/signup">Sign Up</a>
       </div>
       <div v-else>
         <a href="#">{{ user.displayName }}</a>
+        <a href="#">{{ user.email }}</a>
       </div>
     </div>
   </nav>
@@ -24,11 +26,10 @@
   align-items: center;
   padding: 1rem;
 }
-.logo {
-}
 </style>
 
 <script>
+import { mapGetters } from "vuex";
 import { logout } from "../services/firebaseService";
 
 export default {
@@ -36,16 +37,18 @@ export default {
     logout() {
       logout().then(() => {
         this.$store.commit("setUser", {});
+        location.reload();
       });
     }
   },
   computed: {
+    ...mapGetters(["getUser"]),
     user() {
-      return this.$store.state.user;
+      return this.getUser;
+    },
+    isAuthenticated() {
+      return Object.prototype.hasOwnProperty.call(this.user, "uid");
     }
-    // isAuthenticated() {
-    //   return this.$store.state.user.hasOwnProperty("id");
-    // }
   }
 };
 </script>

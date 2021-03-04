@@ -43,3 +43,14 @@ export async function logout() {
 //     }, 10);
 //   });
 // }
+
+// export async function loginGoogle() {
+//   try {
+//     const response = await firebase
+//       .auth()
+//       .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+//     return response.user;
+//   } catch (e) {
+//     return alert(e);
+//   }
+// }

@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store";
 import { firestorePlugin } from "vuefire";
 import firebase from "firebase";
+import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
 
@@ -20,14 +21,22 @@ const config = {
   measurementId: "G-626SYTFZ0W"
 };
 
-console.log(process.env.APIKEY);
-
 firebase.initializeApp(config);
 
 Vue.use(firestorePlugin);
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+const unsubscribe = firebase.auth().onAuthStateChanged(firebaseUser => {
+  new Vue({
+    el: "#app",
+    router,
+    store,
+    vuetify,
+    render: h => h(App),
+    created() {
+      if (firebaseUser) {
+        store.dispatch("fetchUserProfile", firebaseUser);
+      }
+    }
+  });
+  unsubscribe();
+});
