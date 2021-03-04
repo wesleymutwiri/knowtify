@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Editor from "../views/Editor.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
+import firebase from "firebase";
 
 Vue.use(VueRouter);
 
@@ -11,7 +12,10 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/about",
@@ -25,7 +29,10 @@ const routes: Array<RouteConfig> = [
   {
     path: "/editor",
     name: "Editor",
-    component: Editor
+    component: Editor,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/login",
@@ -43,6 +50,15 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next("login");
+  else if (!requiresAuth && currentUser) next();
+  else next();
 });
 
 export default router;

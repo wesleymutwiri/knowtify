@@ -8,6 +8,12 @@
         <router-link to="/">Home</router-link> |
         <router-link to="/about">About</router-link>
       </div>
+      <div v-if="!isAuthenticated">
+        <a href="/signup">Sign Up</a>
+      </div>
+      <div v-else>
+        <a href="#">{{ user.displayName }}</a>
+      </div>
     </div>
   </nav>
 </template>
@@ -21,3 +27,25 @@
 .logo {
 }
 </style>
+
+<script>
+import { logout } from "../services/firebaseService";
+
+export default {
+  methods: {
+    logout() {
+      logout().then(() => {
+        this.$store.commit("setUser", {});
+      });
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+    // isAuthenticated() {
+    //   return this.$store.state.user.hasOwnProperty("id");
+    // }
+  }
+};
+</script>

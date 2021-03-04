@@ -10,14 +10,22 @@
           type="email"
           name="email"
           id=""
-          v-model="email"
+          v-model="user.email"
           placeholder="aa@gmail.com"
         />
+        <input
+          type="text"
+          name="username"
+          id=""
+          v-model="user.username"
+          placeholder="bigBoy"
+        />
+
         <input
           type="password"
           name="password"
           id=""
-          v-model="password"
+          v-model="user.password"
           placeholder="****"
         />
         <button class="sign-up" @click="signUp">Sign Up</button>
@@ -26,28 +34,28 @@
   </div>
 </template>
 <script>
-import firebase from "firebase";
+import { register } from "../services/firebaseService";
+
 export default {
   name: "signup",
   data() {
     return {
-      email: "",
-      password: ""
+      user: {
+        username: "",
+        email: "",
+        password: ""
+      }
     };
   },
   methods: {
     signUp() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(
-          function(user) {
-            alert("Your account has been created Succesfully", user);
-          },
-          function(err) {
-            alert("Something happened", err.message);
-          }
-        );
+      register(this.user.username, this.user.email, this.user.password)
+        .then(user => {
+          this.$store.commit("setUser", user);
+        })
+        .then(() => {
+          this.$router.push("/");
+        });
     }
   }
 };
