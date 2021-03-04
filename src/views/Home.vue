@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <Sidebar />
+    some content
   </div>
 </template>
 
@@ -17,3 +17,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.home {
+  display: flex;
+  min-height: 100vh;
+}
+</style>

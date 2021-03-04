@@ -6,20 +6,22 @@
     <div class="form">
       <h1>Login</h1>
       <form v-on:submit.prevent>
-        <input
+        <v-text-field
           type="email"
           name="email"
           id=""
+          label="email"
           v-model="user.email"
           placeholder="aa@gmail.com"
-        />
-        <input
+        ></v-text-field>
+        <v-text-field
           type="password"
           name="password"
           id=""
+          label="password"
           v-model="user.password"
           placeholder="***"
-        />
+        ></v-text-field>
         <v-btn class="login" @click="login" v-if="!isLoading">Login</v-btn>
         <v-btn type="button" v-else disabled>Loading...</v-btn>
         <v-btn @click="loginWithGoogle">Google auth</v-btn>

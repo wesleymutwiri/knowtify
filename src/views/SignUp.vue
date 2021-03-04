@@ -6,25 +6,28 @@
     <div class="form">
       <h1>Sign Up</h1>
       <form v-on:submit.prevent>
-        <input
+        <v-text-field
           type="email"
           name="email"
           id=""
           v-model="user.email"
+          label="Email"
           placeholder="aa@gmail.com"
-        />
-        <input
+        ></v-text-field>
+        <v-text-field
           type="text"
           name="username"
           id=""
+          label="username"
           v-model="user.username"
           placeholder="bigBoy"
-        />
+        ></v-text-field>
 
-        <input
+        <v-text-field
           type="password"
           name="password"
           id=""
+          label="password"
           v-model="user.password"
           placeholder="****"
         />
