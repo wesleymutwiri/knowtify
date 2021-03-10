@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Navbar />
+    <!-- <Navbar /> -->
     <router-view />
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 // import { getLoggedInUser } from "@/services/firebaseService";
 import firebase from "firebase";
 // const app = firebase.initializeApp(process.env.config);
@@ -17,7 +17,7 @@ import firebase from "firebase";
 export default {
   name: "app",
   components: {
-    Navbar
+    // Navbar
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
@@ -35,4 +35,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#app {
+  height: 100%;
+  min-height: 100vh;
+}
+</style>

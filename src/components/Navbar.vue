@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar>
+  <v-app-bar flat>
     <v-toolbar-title>
       <div class="logo">
         <h1>Knowtify</h1>
@@ -21,7 +21,15 @@
     </div>
   </v-app-bar>
 </template>
-<style scoped></style>
+<style scoped>
+.links * {
+  padding: 1rem;
+}
+
+header {
+  margin-bottom: 1rem;
+}
+</style>
 
 <script>
 import { mapGetters } from "vuex";
